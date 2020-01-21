@@ -1,5 +1,6 @@
 export default {
   LOGIN: 'login',
   USERNAME: 'username',
-  LOCALE_STATE: 'local_state'
+  LOCALE_STATE: 'local_state',
+  URL: '0.0.0.0' 
 }

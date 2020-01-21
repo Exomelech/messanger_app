@@ -1,5 +1,10 @@
 export default {
   login: "Логин",
   password: "Пароль",
-  username: "Имя пользователя"
+  passwordVerify: 'Подтвердите пароль',
+  username: "Имя пользователя",
+  greetingPageHeaderLogin: 'Вход в аккаунт',
+  greetingPageHeaderReg: 'Регистрация аккаунта',
+  greetingPageButtonLogin: 'Ещё не зарегестированы?',
+  greetingPageButtonReg: 'Уже есть аккаунт?'
 }

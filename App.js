@@ -3,7 +3,9 @@ import {Container, Content} from 'native-base';
 import {StyleSheet, Text, View} from 'react-native';
 import {Provider} from 'react-redux';
 import store from './src/store/store';
-import GreetingPage from './src/components/greeting_page';
+import LoginPage from './src/components/login_page';
+
+
 
 const styles = StyleSheet.create({
   back: {
@@ -13,7 +15,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   container: {
-    padding: 20
+    padding: 40
   },
   greetingPage: {
     flex: 1
@@ -25,7 +27,7 @@ const App = () => (
     <Container style={styles.back}>
       <Content>
         <View style={styles.container}>
-          <GreetingPage style={styles.greetingPage}/>
+          <LoginPage style={styles.greetingPage}/>
         </View>
       </Content>
     </Container>
