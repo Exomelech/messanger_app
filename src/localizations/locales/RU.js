@@ -6,5 +6,7 @@ export default {
   greetingPageHeaderLogin: 'Вход в аккаунт',
   greetingPageHeaderReg: 'Регистрация аккаунта',
   greetingPageButtonLogin: 'Ещё не зарегестированы?',
-  greetingPageButtonReg: 'Уже есть аккаунт?'
+  greetingPageButtonReg: 'Уже есть аккаунт?',
+  greetingPageSubmitButtonLogin: 'Вход',
+  greetingPageSubmitButtonReg: 'Регистрация'
 }

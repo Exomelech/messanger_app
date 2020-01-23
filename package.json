@@ -2,6 +2,7 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
+    "start:back": "node server/index.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -9,8 +10,11 @@
   },
   "dependencies": {
     "@react-native-community/masked-view": "^0.1.5",
+    "cors": "^2.8.5",
     "expo": "~36.0.0",
+    "express": "^4.17.1",
     "native-base": "^2.13.8",
+    "object-hash": "^2.0.1",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",

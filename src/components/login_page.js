@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import { Container, Header, Content, Form, Item, Input, Button } from 'native-base';
 import { connect } from 'react-redux';
+import { request } from '../js/functions.js';
 //import AsyncStorage from '@react-native-community/async-storage';
 
 /*
@@ -31,8 +32,27 @@ class LoginPage extends Component {
     });
   };
 
+  submit = () => {
+    const {backendurl: url, backendport: port} = this.props;
+    let server = url+':'+port;
+    //console.log(server);
+    request('get', `http://${server}/helloworld`)
+    .then( res => {
+      if( res.status === 'ok' ){
+        console.log(res)
+      };
+    });
+    // var proceed = false;
+    // fetch(`http://${server}/helloworld`)
+    //   .then((response) => response.json())
+    //   .then((response) => {
+    //       console.log(response.a)
+    //   })
+    //   .catch(err => console.warn('error '+err.message));
+  }
+
   render(){
-    console.log(this.props);
+    //console.log(this.props);
     const {mode} = this.state;
     return (
       <View>
@@ -57,6 +77,9 @@ class LoginPage extends Component {
             <Input placeholder={this.props.localization.passwordVerify} secureTextEntry={true}/>
           </Item>
         }
+        <Button transparent onPress={this.submit}>
+          <Text>{this.props.localization['greetingPageSubmitButton'+mode]}</Text>
+        </Button>
       </Form>
       </View>
     )

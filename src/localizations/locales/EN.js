@@ -6,5 +6,7 @@ export default {
   greetingPageHeaderLogin: 'Log in',
   greetingPageHeaderReg: 'Registration',
   greetingPageButtonLogin: 'Don\'t have account yet?',
-  greetingPageButtonReg: 'Already have an account?'
+  greetingPageButtonReg: 'Already have an account?',
+  greetingPageSubmitButtonLogin: 'Enter',
+  greetingPageSubmitButtonReg: 'Submit'
 }

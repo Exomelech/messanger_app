@@ -9,7 +9,7 @@ const initialState = {
   locale_state: initialLocale,
   localization: locales[initialLocale],
   backendurl: '31.31.108.255',
-  backendport: '00000'
+  backendport: '3000'
 };
 
 function reducer(state = initialState, action) {
