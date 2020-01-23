@@ -30,6 +30,6 @@ app.post("/auth/", jsonParser, (req, res) => {
 app.get('/helloworld', (req, res) => {
   console.log('request')
   res.json({
-    a: 'hello, im a backend'
+    a:'i love nikita'
   })
 })

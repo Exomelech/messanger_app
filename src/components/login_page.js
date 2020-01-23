@@ -35,20 +35,21 @@ class LoginPage extends Component {
   submit = () => {
     const {backendurl: url, backendport: port} = this.props;
     let server = url+':'+port;
-    //console.log(server);
-    request('get', `http://${server}/helloworld`)
-    .then( res => {
-      if( res.status === 'ok' ){
-        console.log(res)
-      };
-    });
-    // var proceed = false;
-    // fetch(`http://${server}/helloworld`)
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //       console.log(response.a)
-    //   })
-    //   .catch(err => console.warn('error '+err.message));
+    console.log(server);
+    // request('get', `http://${server}/helloworld`)
+    // .then( res => {
+    //   if( res.status === 'ok' ){
+    //     console.log(res)
+    //   };
+    // });
+    //var proceed = false;
+    
+    fetch(`http://${server}/helloworld`)
+      .then((response) => response.json())
+      .then((response) => {
+          console.log(response)
+      })
+      .catch(err => console.warn('error '+err.message));
   }
 
   render(){
