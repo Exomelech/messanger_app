@@ -8,8 +8,7 @@ const initialState = {
   login: false,
   locale_state: initialLocale,
   localization: locales[initialLocale],
-  backendurl: '31.31.108.255',
-  backendport: '3000'
+  backendurl: '31.31.108.255:3000'
 };
 
 function reducer(state = initialState, action) {

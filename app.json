@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "My first React Native App",
+    "name": "Messanger",
     "slug": "NewProj",
     "privacy": "public",
     "sdkVersion": "36.0.0",

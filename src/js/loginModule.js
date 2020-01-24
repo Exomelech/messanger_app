@@ -1,7 +1,7 @@
 const login = {};
 
 login.login = (login, password, backendurl) => {
-  fetch(`${backendurl}/login`, {
+  return fetch(`http://${backendurl}/registration`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -9,22 +9,15 @@ login.login = (login, password, backendurl) => {
     },
     body: JSON.stringify({
       login: login,
-      password: password,
-    }),
+      password: password
+    })
   })
   .then( res => res.json())
-  .then( res => {
-    if( res.status == "ok" ){
-      return res.user_data;
-    }else{
-      return res.error;
-    };
-  })
-  .catch(err => console.warn('error '+err.message));
+  .catch(err => console.error('error '+err.message));
 };
 
 login.registration = (login, password, name, backendurl) => {
-  fetch(`${backendurl}/registration`, {
+  return fetch(`http://${backendurl}/registration`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -34,17 +27,10 @@ login.registration = (login, password, name, backendurl) => {
       login: login,
       password: password,
       name: name
-    }),
+    })
   })
   .then( res => res.json())
-  .then( res => {
-    if( res.status == "ok" ){
-      return res.user_data;
-    }else{
-      return res.error;
-    };
-  })
-  .catch(err => console.warn('error '+err.message));
+  .catch(err => console.error('error '+err.message));
 }
 
 export default login;

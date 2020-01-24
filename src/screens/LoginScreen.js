@@ -1,43 +1,103 @@
-import React from 'react';
-import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Image, Alert } from 'react-native';
-//import { Container, Header, Content, Form, Item, Input, Button } from 'native-base';
+import React, {Component} from 'react';
+import { Text, View, TextInput, TouchableHighlight } from 'react-native';
 import styles from '../styles/style';
+import { connect } from 'react-redux';
+import loginModule from '../js/loginModule';
 
-const LoginScreen = ({ navigation }) => {
+//import AsyncStorage from '@react-native-community/async-storage';
 
-  const goToRegistration = () => {
-    navigation.navigate('Registration');
+/*
+getData = async () => {
+  try {
+    const value = await AsyncStorage.getItem('sc_autoLogin')
+    if(value !== null) {
+      // value previously stored
+    }
+  } catch(e) {
+    // error reading value
+  }
+}
+*/
+
+class LoginScreen extends Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      login: '',
+      password: '',
+      pattern: new RegExp("^[A-Za-z0-9-_]{3,}")
+    };
   };
 
-  return(
-    <View style={styles.container}>
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.inputs}
-            placeholder="Login"
-            keyboardType="default"
-            underlineColorAndroid='transparent'
-            // onChangeText={(email) => this.setState({email})}
-          />
-      </View>
-      
-      <View style={styles.inputContainer}>
-        <TextInput style={styles.inputs}
-            placeholder="Password"
-            secureTextEntry={true}
-            underlineColorAndroid='transparent'
-            //onChangeText={(password) => this.setState({password})}
-          />
-      </View>
+  goToRegistration = () => {
+    this.props.navigation.navigate('Registration');
+  };
 
-      <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => {}}>
-        <Text style={styles.loginText}>Login</Text>
-      </TouchableHighlight>
+  signin = () => {
+    const { backendurl } = this.props;
+    const {pattern, login, password} = this.state;
+    if( pattern.test(login) && pattern.test(password) ){
+      loginModule.login(login, password, backendurl)
+      .then( res => {
+        if(res.status == 'ok'){
+          /*
 
-      <TouchableHighlight style={styles.buttonContainer} onPress={goToRegistration}>
-          <Text>Register</Text>
-      </TouchableHighlight>
-    </View>
-  );
+            Action with redux 
+          
+          */ 
+          //this.props.navigation.navigate('Login');
+        };
+      });
+    }else{
+      console.warn('Invalid inputs');
+    }
+  }
+
+  render(){
+
+    const { localization: locale } = this.props;
+
+    return(
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+              placeholder={locale.login}
+              keyboardType="default"
+              underlineColorAndroid='transparent'
+              onChangeText={(value) => this.setState({login: value})}
+              //pattern={"^[A-Za-z0-9-_]{3,}"}
+            />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+              placeholder={locale.password}
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              onChangeText={(value) => this.setState({password: value})}
+              //pattern={"^[A-Za-z0-9-_]{3,}"}
+            />
+        </View>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => {}}>
+          <Text style={styles.loginText}>{locale.signin}</Text>
+        </TouchableHighlight>
+
+        <TouchableHighlight style={styles.buttonContainer} onPress={this.goToRegistration}>
+            <Text>{locale.regNavigation}</Text>
+        </TouchableHighlight>
+      </View>
+    );
+  };
+
 };
 
-export default LoginScreen;
+const mapStateToProps = (state) => {
+  return {
+    localization: state.localization,
+    backendurl: state.backendurl
+  };
+};
+
+export default connect(mapStateToProps)(LoginScreen);

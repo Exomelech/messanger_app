@@ -1,4 +1,3 @@
-const hash = require('object-hash');
 const mysql_api = require("./mysql_api");
 
 module.exports = external_api = (function(){
@@ -74,6 +73,11 @@ module.exports = external_api = (function(){
     }else{
       return utils.reg_request(sql.sql);
     };
+  };
+
+  external_api.reg_request = function(request){
+    let sql = utils.prepareDataForSql(request);
+    return utils.reg_request(sql.sql);
   };
 
   return external_api;
