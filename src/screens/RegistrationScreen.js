@@ -13,8 +13,8 @@ class RegistrationScreen extends Component{
       name: '',
       password: '',
       passVerify: '',
-      pattern: new RegExp("^[A-Za-z0-9-_]{3,}"),
-      namePattern: new RegExp("^[А-Яа-яA-Za-z0-9_-]{3,}")
+      pattern: new RegExp("^[A-Za-z0-9-_]{3,}$"),
+      namePattern: new RegExp("^[А-Яа-яA-Za-z0-9_-]{3,}$")
     };
   };
   
