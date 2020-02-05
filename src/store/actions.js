@@ -1,6 +1,6 @@
-export default {
-  LOGIN: 'login',
-  USERNAME: 'username',
-  LOCALE_STATE: 'local_state',
-  URL: 'url' 
-}
+export function userLogin(payload){
+  return {
+    type: 'USER_LOGIN',
+    payload
+  };
+};

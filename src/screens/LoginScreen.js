@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import { Text, View, TextInput, TouchableHighlight } from 'react-native';
-import styles from '../styles/style';
+import { Container, Content, Item, Icon, CheckBox, Text, Label, Input, Form } from 'native-base';
 import { connect } from 'react-redux';
+import { userLogin } from '../store/actions';
 import loginModule from '../js/loginModule';
-
+import AuthHeader from '../components/AuthHeader';
 //import AsyncStorage from '@react-native-community/async-storage';
 
 /*
@@ -26,12 +26,40 @@ class LoginScreen extends Component{
     this.state = {
       login: '',
       password: '',
-      pattern: new RegExp("^[A-Za-z0-9-_]{3,}")
+      loginError: false,
+      passError: false,
+      pattern: new RegExp("^[A-z0-9\-_]{6,}$"),
     };
   };
 
   goToRegistration = () => {
     this.props.navigation.navigate('Registration');
+  };
+
+  checkLoginInput = (login) => {
+    this.setState({ login });
+  };
+
+  checkLoginBlur = () => {
+    const {pattern, login} = this.state;
+    this.setState({loginError: !pattern.test(login)});
+  };
+
+  checkLoginFocus = () => {
+    this.setState({ loginError: false });
+  };
+
+  checkPassInput = (password) => {
+    this.setState({ password });
+  };
+
+  checkPassBlur = () => {
+    const {pattern, password} = this.state;
+    this.setState({passError: !pattern.test(password)});
+  };
+
+  checkPassFocus = () => {
+    this.setState({ passError: false });
   };
 
   signin = () => {
@@ -57,37 +85,75 @@ class LoginScreen extends Component{
   render(){
 
     const { localization: locale } = this.props;
+    const { login, password, loginError, passError } = this.state;
 
     return(
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
-              placeholder={locale.login}
-              keyboardType="default"
-              underlineColorAndroid='transparent'
-              onChangeText={(value) => this.setState({login: value})}
-              //pattern={"^[A-Za-z0-9-_]{3,}"}
-            />
-        </View>
+      // <View style={styles.container}>
+      //   <View style={styles.inputContainer}>
+      //     <TextInput style={styles.inputs}
+      //         placeholder={locale.login}
+      //         keyboardType="default"
+      //         underlineColorAndroid='transparent'
+      //         onChangeText={(value) => this.setState({login: value})}
+      //         //pattern={"^[A-Za-z0-9-_]{3,}"}
+      //       />
+      //   </View>
 
-        <View style={styles.inputContainer}>
-          <TextInput style={styles.inputs}
-              placeholder={locale.password}
-              secureTextEntry={true}
-              underlineColorAndroid='transparent'
-              onChangeText={(value) => this.setState({password: value})}
-              //pattern={"^[A-Za-z0-9-_]{3,}"}
-            />
-        </View>
+      //   <View style={styles.inputContainer}>
+      //     <TextInput style={styles.inputs}
+      //         placeholder={locale.password}
+      //         secureTextEntry={true}
+      //         underlineColorAndroid='transparent'
+      //         onChangeText={(value) => this.setState({password: value})}
+      //         //pattern={"^[A-Za-z0-9-_]{3,}"}
+      //       />
+      //   </View>
+      //   <View>
+      //     <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => {}}>
+      //       <Text style={styles.loginText}>{locale.signin}</Text>
+      //     </TouchableHighlight>
+      //     <CheckBox
+      //       title='Click Here'
+      //       checked={this.state.checked}
+      //     />
+      //   </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => {}}>
-          <Text style={styles.loginText}>{locale.signin}</Text>
-        </TouchableHighlight>
-
-        <TouchableHighlight style={styles.buttonContainer} onPress={this.goToRegistration}>
-            <Text>{locale.regNavigation}</Text>
-        </TouchableHighlight>
-      </View>
+      //   <TouchableHighlight style={styles.buttonContainer} onPress={this.goToRegistration}>
+      //       <Text>{locale.regNavigation}</Text>
+      //   </TouchableHighlight>
+      // </View>
+      <Container>
+        <AuthHeader title='Login'/>
+        <Content>
+          <Form>
+            <Item 
+              floatingLabel 
+              error={loginError}
+            >
+              <Label>{locale.login}</Label>
+              <Input
+                value = {login}
+                onChangeText = {(value) => this.checkLoginInput(value)}
+                onBlur = { () => this.checkLoginBlur()}
+                onFocus = {()=> this.checkLoginFocus()}
+              />
+            </Item>
+            <Item 
+              floatingLabel
+              error={passError}
+            >
+              <Label>{locale.password}</Label>
+              <Input 
+                value = {password}
+                secureTextEntry={true}
+                onChangeText = {(value) => this.checkPassInput(value)}
+                onBlur = { () => this.checkPassBlur()}
+                onFocus = {()=> this.checkPassFocus()}
+              />
+            </Item>
+          </Form>
+        </Content>
+      </Container>
     );
   };
 
@@ -100,4 +166,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(LoginScreen);
+export default connect(mapStateToProps, {userLogin})(LoginScreen);

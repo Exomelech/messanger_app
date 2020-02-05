@@ -38,3 +38,7 @@ app.post('/registration', jsonParser, (req, res) => {
   external_api.reg_request(req.body)
   .then( data => res.json(data) );
 })
+
+app.post('/login', jsonParser, (req, res) => {
+
+})
