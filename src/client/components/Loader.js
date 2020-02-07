@@ -3,6 +3,6 @@ import LottieView from 'lottie-react-native';
 
 export default Loader = () => 
   <LottieView 
-    source={require('./animations/trail-loading.json')} 
+    source={require('../styles/animations/trail-loading.json')} 
     autoPlay loop 
   />;

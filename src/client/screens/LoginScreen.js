@@ -3,25 +3,13 @@ import { Container, Content, ListItem, CheckBox, Body, Button, Text, Form } from
 import { connect } from 'react-redux';
 import { userLogin } from '../store/actions';
 import loginModule from '../js/loginModule';
-import AuthHeader from '../components/AuthHeader';
+
+import AuthHeader      from '../components/AuthHeader';
 import ValidationInput from '../components/ValidationInput';
+import Loader          from '../components/Loader';
+
 //import AsyncStorage from '@react-native-community/async-storage';
 import {AsyncStorage} from 'react-native';
-import Loader from '../components/Loader';
-
-
-/*
-getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('sc_autoLogin')
-    if(value !== null) {
-      // value previously stored
-    }
-  } catch(e) {
-    // error reading value
-  }
-}
-*/
 
 class LoginScreen extends Component{
 

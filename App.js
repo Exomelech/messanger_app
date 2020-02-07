@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import store from './src/store/store';
-import Navigator from './src/navigation/AppNavigator';
-import GeneralStatusBarColor from './src/components/GeneralStatusBarColor';
+import store from './src/client/store/store';
+import Navigator from './src/client/navigation/AppNavigator';
+import GeneralStatusBarColor from './src/client/components/GeneralStatusBarColor';
+import Loader from './src/client/components/Loader';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-import Loader from './src/components/Loader';
 
 class App extends Component{
 
