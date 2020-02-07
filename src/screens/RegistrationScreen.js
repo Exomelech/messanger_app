@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
-import { Text, View, TextInput, TouchableHighlight } from 'react-native';
-import styles from '../styles/style';
+//import { Text, View, TextInput, TouchableHighlight } from 'react-native';
+import { Container, Content, Item, Button, Text, Form } from 'native-base';
 import { connect } from 'react-redux';
 import loginModule from '../js/loginModule';
+import AuthHeader from '../components/AuthHeader';
+import ValidationInput from '../components/ValidationInput';
 
 class RegistrationScreen extends Component{
 

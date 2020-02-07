@@ -4,6 +4,6 @@ export default {
   password: 'Пароль',
   passwordVerify: 'Подтвердите пароль',
   signin: 'Войти',
-  regNavigation: 'Зарегистрироваться',
+  regNavigation: 'Ещё не зарегистрированы?',
   loginNavigation: 'Уже зарегистрированы?'
 }

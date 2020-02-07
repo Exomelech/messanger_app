@@ -5,7 +5,7 @@ import Navigator from './src/navigation/AppNavigator';
 import GeneralStatusBarColor from './src/components/GeneralStatusBarColor';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-import { AppLoading } from 'expo';
+import Loader from './src/components/Loader';
 
 class App extends Component{
 
@@ -14,7 +14,7 @@ class App extends Component{
     this.state = {
       isReady: false,
     };
-  }
+  };
 
   async componentDidMount() {
     await Font.loadAsync({
@@ -23,12 +23,13 @@ class App extends Component{
       ...Ionicons.font,
     });
     this.setState({ isReady: true });
-  }
+  };
 
   render() {
+
     if (!this.state.isReady) {
-      return <AppLoading />;
-    }
+      return <Loader />;
+    };
     return(
       <Provider store={store}>
         <GeneralStatusBarColor/>

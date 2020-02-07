@@ -3,7 +3,7 @@ import { Item, Label, Input, Text } from 'native-base';
 
 export default ValidationInput = ({ 
     title = 'Title', 
-    secure = false, 
+    secureTextEntry = false, 
     min = 0,
     max = 25,
     pattern = '^[A-z0-9\-_]',
@@ -29,7 +29,7 @@ export default ValidationInput = ({
       };
       if( length > max ){
         errMsg = `Max ${max} characters`;
-        input = input.slice(0, Max);
+        input = input.slice(0, max);
       };
       setError(err);
       setErrorMsg(errMsg);
@@ -48,7 +48,7 @@ export default ValidationInput = ({
         <Input
           placeholder = {title}
           value = {value}
-          secureTextEntry={secure}
+          secureTextEntry={secureTextEntry}
           onChangeText = {value => handleTextInput(value)}
           onBlur = { () => setErrorMsg('')}
           //onFocus = {() => this.checkLoginFocus()}

@@ -10,12 +10,14 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.7.1",
     "@react-native-community/masked-view": "0.1.5",
     "@reduxjs/toolkit": "^1.2.3",
     "cors": "^2.8.5",
     "expo": "^36.0.2",
     "expo-font": "~8.0.0",
     "express": "^4.17.1",
+    "lottie-react-native": "^3.3.2",
     "mysql2": "^2.1.0",
     "native-base": "^2.13.8",
     "object-hash": "^2.0.1",
@@ -36,7 +38,6 @@
     "redux": "^4.0.5"
   },
   "devDependencies": {
-    "@react-native-community/async-storage": "^1.7.1",
     "babel-preset-expo": "~8.0.0"
   },
   "private": true
