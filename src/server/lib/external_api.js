@@ -6,14 +6,11 @@ module.exports = external_api = (function(){
   const utils = {};
 
   utils.prepareDataForSql = function(data){
-    let sql_req = {};
+    let sql = {};
     for( let [key, value] of Object.entries(data) ){
-      sql_req[key] = [value];
+      sql[key] = [value];
     };
-    return {
-      sql:sql_req,
-      type: Object.keys(sql_req).length == 2 ? 'login' : 'reg'
-    };
+    return sql;
   };
 
   utils.catchSQLError = function(err){
@@ -77,7 +74,11 @@ module.exports = external_api = (function(){
 
   external_api.reg_request = function(request){
     let sql = utils.prepareDataForSql(request);
-    return utils.reg_request(sql.sql);
+    return utils.reg_request(sql);
+  };
+  external_api.login_request = function(request){
+    let sql = utils.prepareDataForSql(request);
+    return utils.login_request(sql);
   };
 
   return external_api;

@@ -32,13 +32,14 @@ app.get('/helloworld', (req, res) => {
   res.json({
     a:'i love nikita'
   })
-})
+});
 
 app.post('/registration', jsonParser, (req, res) => {
   external_api.reg_request(req.body)
   .then( data => res.json(data) );
-})
+});
 
 app.post('/login', jsonParser, (req, res) => {
-
-})
+  external_api.login_request(req.body)
+  .then( data => res.json(data) );
+});

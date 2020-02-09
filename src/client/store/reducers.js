@@ -10,7 +10,7 @@ const state = {
   user: {},
   locale_state: initialLocale,
   localization: locales[initialLocale],
-  backendurl: '31.31.108.255:3000'
+  backendurl: '192.168.0.104:3000'
 };
 
 const reducer = createReducer(state, {

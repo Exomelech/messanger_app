@@ -2,8 +2,8 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
-    "start:back": "node server/index.js",
-    "start:nback": "nodemon server/index.js",
+    "start:back": "node src/server/index.js",
+    "start:nback": "nodemon src/server/index.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",

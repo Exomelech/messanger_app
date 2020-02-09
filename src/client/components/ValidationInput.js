@@ -6,44 +6,40 @@ export default ValidationInput = ({
     secureTextEntry = false, 
     min = 0,
     max = 25,
-    pattern = '^[A-z0-9\-_]',
-    onError = false,
-    onChangeText = false
+    onChange = false,
+    pattern = /^[A-Z0-9-_]+$/i
   }) => {
     
     const [value, setValue] = useState('');
-    const [error, setError] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
 
     const handleTextInput = (input) => {
       const length = input.length;
-      let err = false;
-      let errMsg = '';
-      const regex = new RegExp(`${pattern}{0,${max}}$`);
-      if( regex.exec(input) == null ){
-        input = value;
+      let valid = true;
+      let error = '';
+
+      if( pattern.test(input) || length == 0 ){
+        if( length < min ){
+          error = `Min ${min} characters`;
+          valid = false;
+        };
+        if( length <= max ){
+          setValue(input);
+          setErrorMsg(error);
+          if( onChange ){
+            onChange( input, valid );
+          };
+        }else{
+          setErrorMsg(`Max ${max} characters`);
+        };
+      }else{
+        setErrorMsg('Invalid input');
       };
-      if( min != 0 && length < min ){
-        errMsg = `Min ${min} characters`;
-        err = true;
-      };
-      if( length > max ){
-        errMsg = `Max ${max} characters`;
-        input = input.slice(0, max);
-      };
-      setError(err);
-      setErrorMsg(errMsg);
-      setValue(input);
-      if( onError ){
-        onError(error);
-      };
-      if( onChangeText ){
-        onChangeText(Input);
-      };
+
     };
 
     return (
-      <Item floatingLabel error={error}>
+      <Item floatingLabel>
         <Label>{errorMsg}</Label>
         <Input
           placeholder = {title}
