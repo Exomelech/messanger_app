@@ -18,7 +18,7 @@ export default ValidationInput = ({
       let valid = true;
       let error = '';
 
-      if( pattern.test(input) || length == 0 ){
+      if( pattern == false || pattern.test(input) || length == 0 ){
         if( length < min ){
           error = `Min ${min} characters`;
           valid = false;

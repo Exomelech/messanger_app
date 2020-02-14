@@ -19,7 +19,8 @@ class RegistrationScreen extends Component{
       passVerify: '',
       loginValid: false,
       passValid: false,
-      verifyValid: false
+      verifyValid: false,
+      enable: true
     };
   };
   
@@ -27,11 +28,12 @@ class RegistrationScreen extends Component{
     this.props.navigation.navigate('Login');
   };
 
-  async registration() {
+  registration = async () => {
     try {
       const { backendurl } = this.props;
-      const {pattern, namePattern, login, name, password, passVerify} = this.state;
-      if( password == passVerify && pattern.test(login) && pattern.test(password) && namePattern.test(name) ){
+      const { login, name, password, loginValid, passValid, verifyValid } = this.state;
+      if( loginValid && passValid && verifyValid ){
+        this.setState({enable: false});
         loginModule.registration(login, password, name, backendurl)
         .then( res => {
           if(res.status == 'ok'){
@@ -40,68 +42,28 @@ class RegistrationScreen extends Component{
         });
       }else{
         console.warn('Invalid inputs');
+        this.setState({enable: true});
       }
     } catch(err){
       console.warn(err);
+      this.setState({enable: true});
     };
   };
 
   render(){
 
     const { localization: locale } = this.props;
-    const { loginValid, passValid, verifyValid } = this.state;
+    const { loginValid, passValid, verifyValid, enable } = this.state;
 
     const disabled = !(loginValid && passValid && verifyValid);
 
+    if( !enable ){
+      return <Loader/>
+    };
+
     return(
-      // <View style={styles.container}>
-      //   <View style={styles.inputContainer}>
-      //     <TextInput style={styles.inputs}
-      //         placeholder={locale.login}
-      //         keyboardType="default"
-      //         underlineColorAndroid='transparent'
-      //         onChangeText={(value) => this.setState({login: value})}
-      //         //pattern={"^[A-Za-z0-9-_]{3,}"}
-      //       />
-      //   </View>
-      //   <View style={styles.inputContainer}>
-      //     <TextInput style={styles.inputs}
-      //         placeholder={locale.name}
-      //         keyboardType="default"
-      //         underlineColorAndroid='transparent'
-      //         onChangeText={(value) => this.setState({name: value})}
-      //         //required pattern={"^[А-Яа-яA-Za-z0-9_-]{3,}"} minLength='3'
-      //       />
-      //   </View>
-      //   <View style={styles.inputContainer}>
-      //     <TextInput style={styles.inputs}
-      //         placeholder={locale.password}
-      //         //secureTextEntry={true}
-      //         underlineColorAndroid='transparent'
-      //         onChangeText={(value) => this.setState({password: value})}
-      //         //pattern={"^[A-Za-z0-9-_]{3,}"}
-      //       />
-      //   </View>
-      //   <View style={styles.inputContainer}>
-      //     <TextInput style={styles.inputs}
-      //         placeholder={locale.passwordVerify}
-      //         //secureTextEntry={true}
-      //         underlineColorAndroid='transparent'
-      //         onChangeText={(value) => this.setState({passVerify: value})}
-      //         //pattern={"^[A-Za-z0-9-_]{3,}"}
-      //       />
-      //   </View>
-
-      //   <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this.registration}>
-      //     <Text style={styles.loginText}>{locale.regNavigation}</Text>
-      //   </TouchableHighlight>
-
-      //   <TouchableHighlight style={styles.buttonContainer} onPress={this.goToLogin}>
-      //     <Text>{locale.loginNavigation}</Text>
-      //   </TouchableHighlight>
-      // </View>
       <Container>
-        <AuthHeader title='Registragion'/>
+        <AuthHeader title='Registration'/>
         <Content style={{padding:5}}>
           <Form>
             <ValidationInput
@@ -116,7 +78,7 @@ class RegistrationScreen extends Component{
             <ValidationInput
               title = {locale.name}
               max = {30}
-              pattern = ''
+              pattern = {false}
               onChange = {(value) => this.setState({ name: value })}
             />
             <ValidationInput

@@ -6,7 +6,8 @@ app.listen(3000);
 app.use(cors());
 
 const path = require("path");
-const external_api = require("./lib/external_api");
+const temp_db = require('./temp_db/temp_db');
+//const external_api = require("./lib/external_api");
 
 //app.use(jsonParser).use(express.static(path.join(__dirname, "../../dist")));
 
@@ -35,11 +36,13 @@ app.get('/helloworld', (req, res) => {
 });
 
 app.post('/registration', jsonParser, (req, res) => {
-  external_api.reg_request(req.body)
+  //external_api.reg_request(req.body)
+  temp_db.registration( req.body )
   .then( data => res.json(data) );
 });
 
 app.post('/login', jsonParser, (req, res) => {
-  external_api.login_request(req.body)
+  //external_api.login_request(req.body)
+  temp_db.login(req.body)
   .then( data => res.json(data) );
 });

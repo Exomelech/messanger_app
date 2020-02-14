@@ -28,7 +28,6 @@ class LoginScreen extends Component{
   async componentDidMount() {
     try {
       const data = await AsyncStorage.getItem('autologin');
-      console.log(data)
       if( data ){
         const {login, password, remember} = JSON.parse(data);
         if( remember ){
@@ -50,15 +49,15 @@ class LoginScreen extends Component{
     };
   };
 
-  goToRegistration() {
+  goToRegistration = () => {
     this.props.navigation.navigate('Registration');
   };
 
-  handleCheckBox() {
+  handleCheckBox = () => {
     this.setState({ remember: !this.state.remember });
   };
 
-  async signin() {
+  signin = async () => {
     try {
       const { backendurl } = this.props;
       const {login, password, loginValid, passValid} = this.state;
