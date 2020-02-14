@@ -67,6 +67,7 @@ class LoginScreen extends Component{
         .then( res => {
           if(res.status == 'ok'){
             console.log( res );
+            this.props.navigation.navigate('MainScreen')
             //this.props.navigation.navigate('Login');
           }else{
             console.log(res);
